@@ -39,6 +39,14 @@
   <!-- Preload Critical Hero Image (LCP Optimization) -->
   <link rel="preload" as="image" href="assets/images/hero/hero-bg.webp" type="image/webp" fetchpriority="high">
 
+  <!-- Preload Our Story Image (Eliminates Blank Delay) -->
+  <link rel="preload" as="image" href="assets/images/general/cafe-lifestyle.webp" type="image/webp">
+
+  <!-- Preload Experience Section Images (Pinned Card Stack) -->
+  <link rel="preload" as="image" href="assets/images/gallery/gallery-coffee.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/images/gallery/gallery-pizza.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/images/gallery/gallery-interior.webp" type="image/webp">
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -102,21 +110,20 @@
   }
   </script>
 </head>
-<body class="loading">
+<body>
 
-  <!-- Preloader Screen -->
-  <div id="preloader" aria-hidden="true">
-    <div class="preloader-inner">
-      <div class="preloader-logo">THE CORNER CAFE</div>
-      <div class="preloader-tagline">VADODARA • EST. 2024</div>
-      <div class="preloader-progress-track">
-        <div id="preloader-progress"></div>
-      </div>
+  <!-- Lightweight Branded Intro (Subtle & Non-blocking) -->
+  <div id="brand-intro" class="brand-intro" aria-hidden="true">
+    <div class="brand-intro-content">
+      <div class="brand-intro-mark">C</div>
+      <div class="brand-intro-wordmark">THE CORNER CAFE</div>
+      <div class="brand-intro-location">VADODARA</div>
     </div>
   </div>
 
-  <!-- Custom Cursor for Desktop (Respects prefers-reduced-motion) -->
-  <div id="custom-cursor" aria-hidden="true"></div>
+  <!-- Dual Custom Cursor for Desktop: Instant Lead Dot + Smooth Follower Ring -->
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
+  <div id="custom-cursor-dot" class="custom-cursor-dot" aria-hidden="true"></div>
 
   <!-- Sticky Navigation Header -->
   <header id="main-header" role="banner">
@@ -168,27 +175,58 @@
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer -->
-  <div id="mobile-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile Navigation Menu">
-    <ul class="mobile-nav-list">
-      <li><a href="#hero" class="mobile-nav-link active">Home</a></li>
-      <li><a href="#story" class="mobile-nav-link">Our Story</a></li>
-      <li><a href="#menu" class="mobile-nav-link">Menu</a></li>
-      <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
-      <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
-      <li><a href="#reviews" class="mobile-nav-link">Reviews</a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-    </ul>
+  <!-- Mobile Navigation Drawer Overlay (Layer 1) -->
+  <div id="mobile-drawer" class="mobile-drawer-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile Navigation Menu">
+    <div class="mobile-drawer-dialog">
+      <!-- Dedicated Brand Header Row (Layer 2) -->
+      <div class="mobile-drawer-header">
+        <a href="#hero" class="brand-link mobile-drawer-brand" aria-label="The Corner Cafe Home">
+          <div class="brand-mark" aria-hidden="true">C</div>
+          <div class="brand-text">
+            <span class="brand-name">The Corner Cafe</span>
+            <span class="brand-tagline">Vadodara</span>
+          </div>
+        </a>
+        <button 
+          id="mobile-drawer-close" 
+          class="mobile-drawer-close-btn" 
+          type="button" 
+          aria-label="Close navigation menu"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
 
-    <div class="mobile-drawer-footer">
-      <p class="mobile-drawer-contact-line"><strong>Phone:</strong> <span class="dynamic-phone-display">+91 73592 95384</span></p>
-      <p class="mobile-drawer-contact-line"><strong>Hours:</strong> <span class="dynamic-hours-display">9:00 AM – 11:00 PM Daily</span></p>
-      <a href="#contact" class="mobile-drawer-btn">
-        <span>Get Directions</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
-        </svg>
-      </a>
+      <!-- Navigation Content Container (Layer 3) -->
+      <div class="mobile-drawer-body">
+        <nav class="mobile-drawer-nav" aria-label="Mobile Navigation Links">
+          <ul class="mobile-nav-list">
+            <li style="--stagger-index: 0;"><a href="#hero" class="mobile-nav-link active">Home</a></li>
+            <li style="--stagger-index: 1;"><a href="#story" class="mobile-nav-link">Our Story</a></li>
+            <li style="--stagger-index: 2;"><a href="#menu" class="mobile-nav-link">Menu</a></li>
+            <li style="--stagger-index: 3;"><a href="#experience" class="mobile-nav-link">Experience</a></li>
+            <li style="--stagger-index: 4;"><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
+            <li style="--stagger-index: 5;"><a href="#reviews" class="mobile-nav-link">Reviews</a></li>
+            <li style="--stagger-index: 6;"><a href="#contact" class="mobile-nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="mobile-drawer-footer">
+          <div class="mobile-drawer-meta">
+            <p class="mobile-drawer-contact-line"><strong>Phone:</strong> <span class="dynamic-phone-display">+91 73592 95384</span></p>
+            <p class="mobile-drawer-contact-line"><strong>Hours:</strong> <span class="dynamic-hours-display">9:00 AM – 11:00 PM Daily</span></p>
+          </div>
+          <a href="#contact" class="mobile-drawer-btn">
+            <span>Get Directions</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -212,176 +250,244 @@
         <div class="hero-overlay"></div>
       </div>
 
-      <div class="container hero-content">
-        <!-- Eyebrow -->
-        <div class="hero-stagger">
-          <p class="hero-eyebrow">YOUR FAVOURITE CORNER IN VADODARA</p>
-        </div>
+      <div class="container hero-container hero-content">
+        <!-- Area A: Main Hero Content -->
+        <div class="hero-main-area">
+          <!-- Coffee Culture Insignia Detail -->
+          <div class="hero-stagger hero-culture-badge" aria-hidden="true">
+            <span class="culture-badge-dot">☕</span>
+            <span class="culture-badge-text">Artisan Coffee &middot; 100% Pure Vegetarian</span>
+            <span class="culture-badge-loc">Vadodara</span>
+          </div>
 
-        <!-- Headline -->
-        <div class="hero-stagger">
-          <h1 class="hero-headline">
-            Good food.<br>
-            Great coffee.<br>
-            <span class="hero-headline-highlight">Better company.</span>
-          </h1>
-        </div>
+          <!-- Eyebrow -->
+          <div class="hero-stagger">
+            <p class="hero-eyebrow">YOUR FAVOURITE CORNER IN VADODARA</p>
+          </div>
 
-        <!-- Supporting Paragraph -->
-        <div class="hero-stagger">
-          <p class="hero-support-text">
-            From comforting bites to your favourite coffee, discover a place where every visit feels a little special.
-          </p>
-        </div>
+          <!-- Headline (Deliberate 2-line composition) -->
+          <div class="hero-stagger">
+            <h1 class="hero-headline">
+              <span class="hero-line hero-line-primary">Good food. Great coffee.</span>
+              <span class="hero-line hero-line-secondary hero-headline-highlight">Better company.</span>
+            </h1>
+          </div>
 
-        <!-- Call to Actions -->
-        <div class="hero-stagger hero-cta-cluster">
-          <a href="#menu" class="btn-primary magnetic-btn">
-            <span>Explore Our Menu</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-          <a href="#contact" class="btn-secondary magnetic-btn">
-            <span>Find Your Corner</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-          </a>
-        </div>
+          <!-- Supporting Paragraph -->
+          <div class="hero-stagger">
+            <p class="hero-support-text">
+              From comforting bites to your favourite coffee, discover a welcoming neighbourhood gathering spot where every visit feels a little special.
+            </p>
+          </div>
 
-        <!-- Trust Badges -->
-        <div class="hero-stagger hero-trust-bar">
-          <div class="trust-badge-item">
-            <span class="star-rating-box" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          <!-- Call to Actions -->
+          <div class="hero-stagger hero-cta-cluster">
+            <a href="#menu" class="btn-primary magnetic-btn">
+              <span>Explore Our Menu</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
+            </a>
+            <a href="#contact" class="btn-secondary magnetic-btn">
+              <span>Find Your Corner</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Area B: Bottom Information Strip -->
+        <div class="hero-info-strip-area hero-stagger">
+          <div class="hero-trust-bar">
+            <div class="trust-badge-item">
+              <span class="star-rating-box" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </span>
+              <span><strong class="dynamic-rating-value">4.9</strong> / 5 Google Listing (<span class="dynamic-review-count">approx. 196</span> reviews)</span>
+            </div>
+
+            <div class="trust-badge-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Waghodia Road, Vadodara</span>
+            </div>
+
+            <div class="trust-badge-item">
+              <span class="pure-veg-symbol" aria-hidden="true"></span>
+              <span>Vegetarian Cafe Menu</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Area C: Dedicated Scroll Indicator (In-flow below Information Strip) -->
+        <div class="hero-scroll-area">
+          <a href="#story" class="scroll-indicator" aria-label="Scroll down to explore story">
+            <span class="scroll-mouse-icon" aria-hidden="true">
+              <span class="scroll-mouse-wheel"></span>
             </span>
-            <span><strong class="dynamic-rating-value">4.9</strong> / 5 Google Listing (<span class="dynamic-review-count">approx. 196</span> reviews)</span>
-          </div>
-
-          <div class="trust-badge-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>Waghodia Road, Vadodara</span>
-          </div>
-
-          <div class="trust-badge-item">
-            <span class="pure-veg-symbol" aria-hidden="true"></span>
-            <span>Vegetarian Cafe Menu</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <a href="#story" class="scroll-indicator" aria-label="Scroll down to explore story">
-        <span class="scroll-mouse-icon">
-          <span class="scroll-mouse-wheel"></span>
-        </span>
-        <span>SCROLL</span>
-      </a>
-    </section>
-
-
-    <!-- 2. Introduction Section: The Cafe Experience -->
-    <section id="story" class="section-padding" aria-label="About The Corner Cafe Experience">
-      <div class="container">
-        <div class="intro-grid">
-          <!-- Text Column -->
-          <div class="intro-text-col reveal-on-scroll">
-            <span class="section-eyebrow">ABOUT THE CORNER CAFE</span>
-            <h2 class="section-title">A welcoming corner on Waghodia Road.</h2>
-            <p class="intro-lead-text">
-              The Corner Cafe is designed as a comfortable neighborhood gathering spot where good food, refreshing drinks, and relaxed conversations come together.
-            </p>
-            <p class="intro-body-text">
-              Located at Vaikunth Char Rasta, our menu brings together comforting cafe favorites including handcrafted Kulhad Pizza, crisp grilled sandwiches, burgers, pasta, and chilled beverages. Drop in with friends, grab a quick bite, or unwind over coffee.
-            </p>
-            <div class="intro-stamp animate-subtle-float">
-              <span aria-hidden="true">☕</span>
-              <span>A PLACE TO CONNECT.</span>
-            </div>
-          </div>
-
-          <!-- Asymmetric Visual Composition -->
-          <div class="intro-images-col reveal-on-scroll" style="--stagger-delay: 150ms">
-            <div class="intro-img-main-wrap" data-parallax-speed="0.08">
-              <img 
-                src="assets/images/general/cafe-lifestyle.webp" 
-                alt="Concept photograph: friends sharing coffee and conversation" 
-                width="900" 
-                height="1125" 
-                loading="lazy" 
-                decoding="async" 
-                class="intro-img-main"
-              />
-            </div>
-            <div class="intro-img-accent-wrap" data-parallax-speed="-0.12">
-              <img 
-                src="assets/images/general/cafe-bite.webp" 
-                alt="Concept photograph: close-up savory cafe bite" 
-                width="600" 
-                height="600" 
-                loading="lazy" 
-                decoding="async" 
-                class="intro-img-accent"
-              />
-            </div>
-          </div>
+            <span class="scroll-text">SCROLL</span>
+          </a>
         </div>
       </div>
     </section>
 
 
+    <!-- 2. Editorial Story Section: The Corner Cafe Experience -->
+    <section id="story" class="story-section" aria-label="Our Story – The Corner Cafe">
+      <div class="container story-container">
+        
+        <!-- Editorial Masthead / Header -->
+        <header class="story-header">
+          <div class="story-eyebrow-row">
+            <span class="story-section-tag reveal-text" style="--stagger-delay: 50ms">
+              <span class="story-tag-dot" aria-hidden="true"></span>
+              OUR STORY · THE CORNER CAFE
+            </span>
+            <span class="story-eyebrow-rule reveal-scale" style="--stagger-delay: 100ms" aria-hidden="true"></span>
+          </div>
+          
+          <h2 class="story-headline">
+            <span class="story-headline-line reveal-heading" style="--stagger-delay: 100ms">More than coffee.</span>
+            <span class="story-headline-line story-headline-accent reveal-heading" style="--stagger-delay: 240ms">A place to belong.</span>
+          </h2>
+        </header>
+
+        <!-- Asymmetrical Editorial Stage -->
+        <div class="story-editorial-stage">
+          
+          <!-- Visual Column: Cinematic Cafe Imagery -->
+          <div class="story-visual-col">
+            <div class="story-image-card reveal-clip" style="--stagger-delay: 160ms">
+              <div class="story-image-inner">
+                <img 
+                  src="assets/images/general/cafe-lifestyle.webp" 
+                  alt="Friends sharing warm conversation and coffee at The Corner Cafe" 
+                  width="900" 
+                  height="617" 
+                  loading="eager" 
+                  fetchpriority="high"
+                  decoding="async" 
+                  class="story-main-img"
+                />
+                <div class="story-image-overlay" aria-hidden="true"></div>
+              </div>
+
+              <!-- Editorial Image Metadata Footer -->
+              <div class="story-image-footer">
+                <span class="story-image-coords">VADODARA · 22.2897° N, 73.2274° E</span>
+                <span class="story-image-caption">VAIKUNTH CHAR RASTA, WAGHODIA RD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Narrative Column: Refined Typography & Breathing Space -->
+          <div class="story-narrative-col">
+            
+            <!-- Fine-Line Decorative Emblem -->
+            <div class="story-decorative-mark reveal-scale" style="--stagger-delay: 180ms" aria-hidden="true">
+              <span class="story-mark-line"></span>
+              <span class="story-mark-symbol">✦</span>
+              <span class="story-mark-text">EST. VADODARA</span>
+              <span class="story-mark-symbol">✦</span>
+              <span class="story-mark-line"></span>
+            </div>
+
+            <!-- Refined Text Blocks with Drop Cap -->
+            <div class="story-narrative-content">
+              <p class="story-lead-text reveal-text" style="--stagger-delay: 260ms">
+                <span class="story-drop-cap">T</span>he Corner Cafe was created as a comfortable neighbourhood gathering spot on Waghodia Road—where good food, refreshing drinks, and relaxed conversations come together without rush.
+              </p>
+              
+              <p class="story-body-text reveal-text" style="--stagger-delay: 360ms">
+                Located at Vaikunth Char Rasta, our kitchen brings together comforting cafe favorites including handcrafted Kulhad Pizza, crisp grilled sandwiches, burgers, pasta, and chilled beverages. Drop in with friends, grab a quick bite, or unwind over coffee.
+              </p>
+            </div>
+
+            <!-- Authentic Pure-Veg Ethos Bar -->
+            <div class="story-ethos-strip reveal-scale" style="--stagger-delay: 440ms">
+              <div class="story-ethos-pill">
+                <span class="story-ethos-icon" aria-hidden="true">🌱</span>
+                <span class="story-ethos-label">100% Pure Vegetarian</span>
+              </div>
+              <div class="story-ethos-divider" aria-hidden="true"></div>
+              <div class="story-ethos-pill">
+                <span class="story-ethos-icon" aria-hidden="true">☕</span>
+                <span class="story-ethos-label">Artisan Cafe Culture</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
     <!-- 3. Signature Menu Section -->
-    <!-- 3. Signature Menu Section -->
-                <!-- 3. Signature Menu Section -->
     <section id="menu" aria-label="Our Digital Menu">
       <div class="container">
         <!-- Menu Hero Header -->
-        <header class="section-header text-center reveal-on-scroll">
-          <span class="section-eyebrow">THE CORNER CAFE · VADODARA</span>
-          <h2 class="section-title">A little something for every craving.</h2>
-          <p class="section-subtitle">
+        <header class="section-header text-center">
+          <span class="section-eyebrow reveal-text">THE CORNER CAFE · VADODARA</span>
+          <h2 class="section-title reveal-heading">A little something for every craving.</h2>
+          <p class="section-subtitle reveal-text" style="--stagger-delay: 120ms">
             From comforting favourites to refreshing beverages, find something you'll love.
           </p>
         </header>
+      </div>
 
-        <!-- Sticky Category Navigation Bar -->
-        <nav id="menu-sticky-nav" class="menu-sticky-nav-bar" aria-label="Menu Category Jump Links">
-          <div class="menu-sticky-nav-inner" role="tablist">
-            <a href="#cat-tcc-specials" class="menu-nav-pill active" data-target="cat-tcc-specials" role="tab" aria-selected="true">
-              <span class="pill-num">01</span>
-              <span class="pill-label">TCC Specials</span>
-            </a>
-            <a href="#cat-sandwiches-frankies" class="menu-nav-pill" data-target="cat-sandwiches-frankies" role="tab" aria-selected="false">
-              <span class="pill-num">02</span>
-              <span class="pill-label">Sandwiches &amp; Frankies</span>
-            </a>
-            <a href="#cat-maggi-pasta" class="menu-nav-pill" data-target="cat-maggi-pasta" role="tab" aria-selected="false">
-              <span class="pill-num">03</span>
-              <span class="pill-label">Maggi &amp; Pasta</span>
-            </a>
-            <a href="#cat-parathas-combos" class="menu-nav-pill" data-target="cat-parathas-combos" role="tab" aria-selected="false">
-              <span class="pill-num">04</span>
-              <span class="pill-label">Parathas &amp; Combos</span>
-            </a>
-            <a href="#cat-beverages" class="menu-nav-pill" data-target="cat-beverages" role="tab" aria-selected="false">
-              <span class="pill-num">05</span>
-              <span class="pill-label">Beverages</span>
-            </a>
-            <a href="#cat-mojitos" class="menu-nav-pill" data-target="cat-mojitos" role="tab" aria-selected="false">
-              <span class="pill-num">06</span>
-              <span class="pill-label">Mojitos</span>
-            </a>
-          </div>
-        </nav>
+      <!-- Sticky Category Navigation Bar (Edge-to-Edge Container) -->
+      <nav id="menu-sticky-nav" class="menu-sticky-nav-bar" aria-label="Menu Category Navigation">
+        <div class="menu-sticky-nav-inner" role="tablist">
+          <!-- Animated Active Glider Indicator -->
+          <div class="menu-nav-glider" aria-hidden="true"></div>
 
+          <button type="button" class="menu-nav-pill active" data-category="all" data-target="all" role="tab" aria-selected="true" id="tab-all">
+            <span class="pill-label">All Items</span>
+            <span class="pill-count">69</span>
+          </button>
+          <button type="button" class="menu-nav-pill" data-category="cat-tcc-specials" data-target="cat-tcc-specials" role="tab" aria-selected="false" id="tab-tcc-specials">
+            <span class="pill-num">01</span>
+            <span class="pill-label">TCC Specials</span>
+            <span class="pill-count">13</span>
+          </button>
+          <button type="button" class="menu-nav-pill" data-category="cat-sandwiches-frankies" data-target="cat-sandwiches-frankies" role="tab" aria-selected="false" id="tab-sandwiches-frankies">
+            <span class="pill-num">02</span>
+            <span class="pill-label">Sandwiches &amp; Frankies</span>
+            <span class="pill-count">12</span>
+          </button>
+          <button type="button" class="menu-nav-pill" data-category="cat-maggi-pasta" data-target="cat-maggi-pasta" role="tab" aria-selected="false" id="tab-maggi-pasta">
+            <span class="pill-num">03</span>
+            <span class="pill-label">Maggi &amp; Pasta</span>
+            <span class="pill-count">12</span>
+          </button>
+          <button type="button" class="menu-nav-pill" data-category="cat-parathas-combos" data-target="cat-parathas-combos" role="tab" aria-selected="false" id="tab-parathas-combos">
+            <span class="pill-num">04</span>
+            <span class="pill-label">Parathas &amp; Combos</span>
+            <span class="pill-count">13</span>
+          </button>
+          <button type="button" class="menu-nav-pill" data-category="cat-beverages" data-target="cat-beverages" role="tab" aria-selected="false" id="tab-beverages">
+            <span class="pill-num">05</span>
+            <span class="pill-label">Beverages</span>
+            <span class="pill-count">17</span>
+          </button>
+          <button type="button" class="menu-nav-pill" data-category="cat-mojitos" data-target="cat-mojitos" role="tab" aria-selected="false" id="tab-mojitos">
+            <span class="pill-num">06</span>
+            <span class="pill-label">Mojitos</span>
+            <span class="pill-count">2</span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="container">
         <!-- Editorial Menu Content -->
         <div id="menu-editorial-content" class="menu-editorial-content">
           <!-- Category 01: TCC Specials, Pizzas & Sides -->
@@ -738,26 +844,40 @@
                 </article>
               </div>
             </div>
-          </section>
 
-          <!-- Editorial Photo Break -->
-          <figure class="menu-editorial-break reveal-on-scroll">
-            <div class="menu-editorial-img-wrap">
-              <img 
-                src="assets/images/menu/margherita-pizza.webp" 
-                alt="Artisanal 7-inch Margherita Pizza with golden crust and melted mozzarella" 
-                width="1200" 
-                height="480" 
-                loading="lazy" 
-                decoding="async" 
-                class="menu-editorial-img"
-              />
-              <figcaption class="menu-editorial-caption">
-                <span class="caption-eyebrow">TCC Oven Specialties</span>
-                <span class="caption-title">Artisanal 7-Inch Margherita Pizza</span>
-              </figcaption>
+            <!-- Editorial Photo Break -->
+            <figure class="menu-editorial-break reveal-on-scroll">
+              <div class="menu-editorial-img-wrap">
+                <img 
+                  src="assets/images/menu/margherita-pizza.webp" 
+                  alt="Artisanal 7-inch Margherita Pizza with golden crust and melted mozzarella" 
+                  width="1200" 
+                  height="480" 
+                  loading="lazy" 
+                  decoding="async" 
+                  class="menu-editorial-img"
+                />
+                <figcaption class="menu-editorial-caption">
+                  <span class="caption-eyebrow">TCC Oven Specialties</span>
+                  <span class="caption-title">Artisanal 7-Inch Margherita Pizza</span>
+                </figcaption>
+              </div>
+            </figure>
+
+            <!-- Category Footer Navigation -->
+            <div class="menu-cat-footer-bar">
+              <div class="menu-cat-footer-inner">
+                <span class="menu-cat-footer-count">13 TCC Special Items</span>
+                <div class="menu-cat-footer-actions">
+                  <button type="button" class="menu-cat-nav-btn all-btn" data-target="all">View All 69 Items</button>
+                  <button type="button" class="menu-cat-nav-btn next-btn" data-target="cat-sandwiches-frankies">
+                    <span>Next: Sandwiches &amp; Frankies</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+              </div>
             </div>
-          </figure>
+          </section>
 
           <!-- Category 02: Sandwiches & Frankies -->
           <section id="cat-sandwiches-frankies" class="menu-editorial-category" data-cat-id="cat-sandwiches-frankies">
@@ -1078,26 +1198,41 @@
                 </article>
               </div>
             </div>
-          </section>
 
-          <!-- Editorial Photo Break -->
-          <figure class="menu-editorial-break reveal-on-scroll">
-            <div class="menu-editorial-img-wrap">
-              <img 
-                src="assets/images/menu/grilled-sandwich.webp" 
-                alt="Golden grill-toasted vegetable sandwich on wooden platter" 
-                width="1200" 
-                height="480" 
-                loading="lazy" 
-                decoding="async" 
-                class="menu-editorial-img"
-              />
-              <figcaption class="menu-editorial-caption">
-                <span class="caption-eyebrow">Grill Pressed Favorites</span>
-                <span class="caption-title">Toasted Golden Grilled Sandwich</span>
-              </figcaption>
+            <!-- Editorial Photo Break -->
+            <figure class="menu-editorial-break reveal-on-scroll">
+              <div class="menu-editorial-img-wrap">
+                <img 
+                  src="assets/images/menu/grilled-sandwich.webp" 
+                  alt="Golden grill-toasted vegetable sandwich on wooden platter" 
+                  width="1200" 
+                  height="480" 
+                  loading="lazy" 
+                  decoding="async" 
+                  class="menu-editorial-img"
+                />
+                <figcaption class="menu-editorial-caption">
+                  <span class="caption-eyebrow">Grill Pressed Favorites</span>
+                  <span class="caption-title">Toasted Golden Grilled Sandwich</span>
+                </figcaption>
+              </div>
+            </figure>
+
+            <!-- Category Footer Navigation -->
+            <div class="menu-cat-footer-bar">
+              <div class="menu-cat-footer-inner">
+                <button type="button" class="menu-cat-nav-btn prev-btn" data-target="cat-tcc-specials">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  <span>Prev: TCC Specials</span>
+                </button>
+                <button type="button" class="menu-cat-nav-btn all-btn" data-target="all">View All 69 Items</button>
+                <button type="button" class="menu-cat-nav-btn next-btn" data-target="cat-maggi-pasta">
+                  <span>Next: Maggi &amp; Pasta</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
             </div>
-          </figure>
+          </section>
 
           <!-- Category 03: Maggi & Pasta -->
           <section id="cat-maggi-pasta" class="menu-editorial-category" data-cat-id="cat-maggi-pasta">
@@ -1418,26 +1553,41 @@
                 </article>
               </div>
             </div>
-          </section>
 
-          <!-- Editorial Photo Break -->
-          <figure class="menu-editorial-break reveal-on-scroll">
-            <div class="menu-editorial-img-wrap">
-              <img 
-                src="assets/images/menu/white-sauce-pasta.webp" 
-                alt="Penne pasta bathed in creamy garlic Alfredo white sauce" 
-                width="1200" 
-                height="480" 
-                loading="lazy" 
-                decoding="async" 
-                class="menu-editorial-img"
-              />
-              <figcaption class="menu-editorial-caption">
-                <span class="caption-eyebrow">Italian Style Penne</span>
-                <span class="caption-title">Creamy Penne Alfredo</span>
-              </figcaption>
+            <!-- Editorial Photo Break -->
+            <figure class="menu-editorial-break reveal-on-scroll">
+              <div class="menu-editorial-img-wrap">
+                <img 
+                  src="assets/images/menu/white-sauce-pasta.webp" 
+                  alt="Penne pasta bathed in creamy garlic Alfredo white sauce" 
+                  width="1200" 
+                  height="480" 
+                  loading="lazy" 
+                  decoding="async" 
+                  class="menu-editorial-img"
+                />
+                <figcaption class="menu-editorial-caption">
+                  <span class="caption-eyebrow">Italian Style Penne</span>
+                  <span class="caption-title">Creamy Penne Alfredo</span>
+                </figcaption>
+              </div>
+            </figure>
+
+            <!-- Category Footer Navigation -->
+            <div class="menu-cat-footer-bar">
+              <div class="menu-cat-footer-inner">
+                <button type="button" class="menu-cat-nav-btn prev-btn" data-target="cat-sandwiches-frankies">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  <span>Prev: Sandwiches &amp; Frankies</span>
+                </button>
+                <button type="button" class="menu-cat-nav-btn all-btn" data-target="all">View All 69 Items</button>
+                <button type="button" class="menu-cat-nav-btn next-btn" data-target="cat-parathas-combos">
+                  <span>Next: Parathas &amp; Combos</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
             </div>
-          </figure>
+          </section>
 
           <!-- Category 04: Stuffed Parathas & Combo Meals -->
           <section id="cat-parathas-combos" class="menu-editorial-category" data-cat-id="cat-parathas-combos">
@@ -1782,6 +1932,21 @@
                   </div>
                 <p class="menu-row-note">Served with salad, papad and achar.</p>
                 </article>
+              </div>
+            </div>
+
+            <!-- Category Footer Navigation -->
+            <div class="menu-cat-footer-bar">
+              <div class="menu-cat-footer-inner">
+                <button type="button" class="menu-cat-nav-btn prev-btn" data-target="cat-maggi-pasta">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  <span>Prev: Maggi &amp; Pasta</span>
+                </button>
+                <button type="button" class="menu-cat-nav-btn all-btn" data-target="all">View All 69 Items</button>
+                <button type="button" class="menu-cat-nav-btn next-btn" data-target="cat-beverages">
+                  <span>Next: Beverages</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
               </div>
             </div>
           </section>
@@ -2245,26 +2410,41 @@
                 </article>
               </div>
             </div>
-          </section>
 
-          <!-- Editorial Photo Break -->
-          <figure class="menu-editorial-break reveal-on-scroll">
-            <div class="menu-editorial-img-wrap">
-              <img 
-                src="assets/images/gallery/gallery-coffee.webp" 
-                alt="Chilled iced coffee with creamy milk swirl" 
-                width="1200" 
-                height="480" 
-                loading="lazy" 
-                decoding="async" 
-                class="menu-editorial-img"
-              />
-              <figcaption class="menu-editorial-caption">
-                <span class="caption-eyebrow">Chilled Selections</span>
-                <span class="caption-title">Signature Iced Coffee &amp; Handcrafted Blends</span>
-              </figcaption>
+            <!-- Editorial Photo Break -->
+            <figure class="menu-editorial-break reveal-on-scroll">
+              <div class="menu-editorial-img-wrap">
+                <img 
+                  src="assets/images/gallery/gallery-coffee.webp" 
+                  alt="Chilled iced coffee with creamy milk swirl" 
+                  width="1200" 
+                  height="480" 
+                  loading="lazy" 
+                  decoding="async" 
+                  class="menu-editorial-img"
+                />
+                <figcaption class="menu-editorial-caption">
+                  <span class="caption-eyebrow">Chilled Selections</span>
+                  <span class="caption-title">Signature Iced Coffee &amp; Handcrafted Blends</span>
+                </figcaption>
+              </div>
+            </figure>
+
+            <!-- Category Footer Navigation -->
+            <div class="menu-cat-footer-bar">
+              <div class="menu-cat-footer-inner">
+                <button type="button" class="menu-cat-nav-btn prev-btn" data-target="cat-parathas-combos">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  <span>Prev: Parathas &amp; Combos</span>
+                </button>
+                <button type="button" class="menu-cat-nav-btn all-btn" data-target="all">View All 69 Items</button>
+                <button type="button" class="menu-cat-nav-btn next-btn" data-target="cat-mojitos">
+                  <span>Next: Mojitos</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
             </div>
-          </figure>
+          </section>
 
           <!-- Category 06: Mojitos (Non-Alcoholic) -->
           <section id="cat-mojitos" class="menu-editorial-category" data-cat-id="cat-mojitos">
@@ -2332,6 +2512,21 @@
                 </article>
               </div>
             </div>
+
+            <!-- Category Footer Navigation -->
+            <div class="menu-cat-footer-bar">
+              <div class="menu-cat-footer-inner">
+                <button type="button" class="menu-cat-nav-btn prev-btn" data-target="cat-beverages">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  <span>Prev: Beverages</span>
+                </button>
+                <button type="button" class="menu-cat-nav-btn all-btn" data-target="all">View All 69 Items</button>
+                <button type="button" class="menu-cat-nav-btn next-btn" data-target="cat-tcc-specials">
+                  <span>Back to Start: TCC Specials</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
           </section>
 
         </div>
@@ -2347,59 +2542,354 @@
     </section>
 
 
-    <!-- 4. Special Experience Section (Dark Section) -->
-    <section id="experience" aria-label="The Corner Cafe Experience Pillars">
+    <!-- 4. Experience Section -->
+    <section id="experience" class="experience-section" aria-label="The Corner Cafe Experience Pillars">
       <div class="experience-bg-pattern" aria-hidden="true"></div>
-      <div class="container">
-        <!-- Section Header -->
-        <header class="section-header text-center reveal-on-scroll">
-          <span class="section-eyebrow" style="color: var(--color-terracotta);">CAFE ESSENTIALS</span>
-          <h2 class="section-title">
-            Good Food. Great Coffee.<br>
-            <span class="experience-title-highlight">Better Company.</span>
-          </h2>
-          <p class="section-subtitle" style="color: rgba(var(--color-cream-rgb), 0.75);">
-            A neighborhood cafe concept designed around comforting food, refreshing beverages, and welcoming seating on Waghodia Road.
-          </p>
-        </header>
 
-        <!-- 4 Experience Feature Cards -->
-        <div id="experience-cards-grid" class="experience-cards-grid">
-          <div class="exp-card reveal-on-scroll is-revealed" style="--stagger-delay: 0ms">
-            <div class="exp-card-number">01</div>
-            <div class="exp-card-body">
-              <h3 class="exp-card-title">Cafe Food</h3>
-              <p class="exp-card-desc">A selection of vegetarian pizzas, burgers, sandwiches, pasta and savory bites prepared to order.</p>
+      <!-- A. Experience Introduction (Normal Document Flow - Scrolls Past Naturally) -->
+      <div class="experience-intro-flow">
+        <div class="container">
+          <header class="section-header text-center experience-header">
+            <span class="section-eyebrow reveal-text" style="color: var(--color-terracotta);">CAFE ESSENTIALS</span>
+            <h2 class="section-title reveal-heading">
+              Good Food. Great Coffee.<br>
+              <span class="experience-title-highlight">Better Company.</span>
+            </h2>
+            <p class="section-subtitle reveal-text" style="color: rgba(var(--color-cream-rgb), 0.75); --stagger-delay: 120ms;">
+              A neighborhood cafe concept designed around comforting food, refreshing beverages, and welcoming seating on Waghodia Road.
+            </p>
+          </header>
+        </div>
+      </div>
+
+      <!-- B. Experience Storytelling Stage (Independently Pinned Viewport Container - AW Media Pattern) -->
+      <div id="experience-pinned-viewport" class="experience-pinned-viewport">
+        <div class="container experience-stage-container">
+          
+          <div class="exp-deck-wrapper" id="experience-deck-wrapper">
+            
+            <!-- Floating Navigation / Step Tracker -->
+            <aside class="exp-deck-nav" aria-label="Experience Highlights Navigation">
+              <div class="exp-nav-counter" aria-live="polite">
+                <span class="exp-nav-current" id="exp-current-step">01</span>
+                <span class="exp-nav-sep">/</span>
+                <span class="exp-nav-total">03</span>
+              </div>
+              <div class="exp-nav-track" aria-hidden="true">
+                <div class="exp-nav-fill" id="exp-stack-progress-fill"></div>
+              </div>
+              <div class="exp-nav-pills" role="tablist">
+                <button type="button" class="exp-nav-dot active" data-index="0" role="tab" aria-selected="true" aria-label="Card 1: Coffee &amp; Drinks">
+                  <span class="dot-inner"></span>
+                  <span class="dot-label">01 · Coffee &amp; Drinks</span>
+                </button>
+                <button type="button" class="exp-nav-dot" data-index="1" role="tab" aria-selected="false" aria-label="Card 2: Comforting Food">
+                  <span class="dot-inner"></span>
+                  <span class="dot-label">02 · Comforting Food</span>
+                </button>
+                <button type="button" class="exp-nav-dot" data-index="2" role="tab" aria-selected="false" aria-label="Card 3: Moments &amp; Atmosphere">
+                  <span class="dot-inner"></span>
+                  <span class="dot-label">03 · Moments &amp; Atmosphere</span>
+                </button>
+              </div>
+            </aside>
+
+            <!-- Layered Editorial Card Stack Deck -->
+            <div class="exp-card-deck" id="exp-card-deck">
+              
+              <!-- CARD 01: Coffee & Drinks -->
+              <article class="exp-stack-card is-active" data-card="0" id="exp-card-0">
+                <div class="exp-card-grid">
+                  <div class="exp-card-visual">
+                    <img 
+                      src="assets/images/gallery/gallery-coffee.webp" 
+                      alt="Artisan coffee and signature drinks at The Corner Cafe" 
+                      width="800" 
+                      height="560" 
+                      fetchpriority="high"
+                      decoding="async"
+                      class="exp-card-img"
+                    />
+                    <div class="exp-card-badge">01 · ARTISAN BREWS</div>
+                    <div class="exp-card-vignette" aria-hidden="true"></div>
+                  </div>
+                  <div class="exp-card-content">
+                    <span class="exp-card-tag">CAFE ESSENTIAL · 01 / 03</span>
+                    <h3 class="exp-card-headline">Artisan Brews &amp; Crafted Sips</h3>
+                    <p class="exp-card-description">
+                      Classic espresso coffees, rich cold brews, fragrant herbal teas, and decadent thickshakes crafted fresh to elevate your daily coffee pause.
+                    </p>
+                    <div class="exp-card-features">
+                      <span class="exp-feature-pill">Classic Espresso</span>
+                      <span class="exp-feature-pill">House Cold Brew</span>
+                      <span class="exp-feature-pill">Signature Thickshakes</span>
+                      <span class="exp-feature-pill">Fresh Herbal Teas</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- CARD 02: Comforting Food -->
+              <article class="exp-stack-card" data-card="1" id="exp-card-1">
+                <div class="exp-card-grid">
+                  <div class="exp-card-visual">
+                    <img 
+                      src="assets/images/gallery/gallery-pizza.webp" 
+                      alt="Comforting cafe bites and handcrafted vegetarian pizzas" 
+                      width="800" 
+                      height="560" 
+                      loading="eager"
+                      decoding="async"
+                      class="exp-card-img"
+                    />
+                    <div class="exp-card-badge">02 · COMFORTING FOOD</div>
+                    <div class="exp-card-vignette" aria-hidden="true"></div>
+                  </div>
+                  <div class="exp-card-content">
+                    <span class="exp-card-tag">CAFE ESSENTIAL · 02 / 03</span>
+                    <h3 class="exp-card-headline">Comforting Handcrafted Bites</h3>
+                    <p class="exp-card-description">
+                      From handcrafted earthen Kulhad Pizzas and toasted cheese sandwiches to loaded frankies and sizzling pastas made fresh in our vegetarian kitchen.
+                    </p>
+                    <div class="exp-card-features">
+                      <span class="exp-feature-pill">Handcrafted Kulhad Pizza</span>
+                      <span class="exp-feature-pill">Grilled Sandwiches</span>
+                      <span class="exp-feature-pill">Loaded Frankies</span>
+                      <span class="exp-feature-pill">Italian Pastas</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- CARD 03: Moments & Atmosphere -->
+              <article class="exp-stack-card" data-card="2" id="exp-card-2">
+                <div class="exp-card-grid">
+                  <div class="exp-card-visual">
+                    <img 
+                      src="assets/images/gallery/gallery-interior.webp" 
+                      alt="Welcoming neighbourhood cafe seating and atmosphere at Vaikunth Char Rasta" 
+                      width="800" 
+                      height="560" 
+                      loading="eager"
+                      decoding="async"
+                      class="exp-card-img"
+                    />
+                    <div class="exp-card-badge">03 · ATMOSPHERE &amp; SPACE</div>
+                    <div class="exp-card-vignette" aria-hidden="true"></div>
+                  </div>
+                  <div class="exp-card-content">
+                    <span class="exp-card-tag">CAFE ESSENTIAL · 03 / 03</span>
+                    <h3 class="exp-card-headline">A Neighbourhood Corner to Unwind</h3>
+                    <p class="exp-card-description">
+                      A welcoming neighbourhood corner at Vaikunth Char Rasta on Waghodia Road, designed for unhurried conversations, casual catch-ups, and peaceful afternoon breaks.
+                    </p>
+                    <div class="exp-card-features">
+                      <span class="exp-feature-pill">Vaikunth Char Rasta</span>
+                      <span class="exp-feature-pill">Unhurried Setting</span>
+                      <span class="exp-feature-pill">Welcoming Seating</span>
+                      <span class="exp-feature-pill">Pure Veg Hospitality</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
             </div>
-            <div class="exp-card-corner-accent" aria-hidden="true"></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- C. Mobile Experience Container (< 992px) -->
+      <div class="container experience-mobile-container">
+        
+        <!-- C1. Dedicated Mobile Pinned In-Place Storytelling Stage -->
+        <div id="experience-mobile-pinned-stage" class="experience-mobile-pinned-stage" aria-label="Mobile Cafe Essentials In-Place Storytelling">
+          
+          <!-- Stage Top Header: Section Eyebrow + Active Counter -->
+          <div class="exp-mob-header">
+            <span class="exp-mob-kicker">CAFE ESSENTIALS</span>
+            <div class="exp-mob-counter" aria-live="polite">
+              <span class="exp-mob-current" id="exp-mob-step-num">01</span>
+              <span class="exp-mob-sep">/</span>
+              <span class="exp-mob-total">03</span>
+            </div>
           </div>
 
-          <div class="exp-card reveal-on-scroll is-revealed" style="--stagger-delay: 100ms">
-            <div class="exp-card-number">02</div>
-            <div class="exp-card-body">
-              <h3 class="exp-card-title">Coffee & Drinks</h3>
-              <p class="exp-card-desc">Classic espresso coffees, cold brews, herbal tea infusions, and blended thick milkshakes.</p>
+          <!-- Three-Part Coordinated Progress Indicator -->
+          <div class="exp-mob-progress-bar" aria-hidden="true">
+            <div class="exp-mob-progress-track">
+              <div class="exp-mob-progress-segment" data-seg="0">
+                <div class="exp-mob-segment-fill" id="exp-mob-seg-fill-0"></div>
+              </div>
+              <div class="exp-mob-progress-segment" data-seg="1">
+                <div class="exp-mob-segment-fill" id="exp-mob-seg-fill-1"></div>
+              </div>
+              <div class="exp-mob-progress-segment" data-seg="2">
+                <div class="exp-mob-segment-fill" id="exp-mob-seg-fill-2"></div>
+              </div>
             </div>
-            <div class="exp-card-corner-accent" aria-hidden="true"></div>
           </div>
 
-          <div class="exp-card reveal-on-scroll is-revealed" style="--stagger-delay: 200ms">
-            <div class="exp-card-number">03</div>
-            <div class="exp-card-body">
-              <h3 class="exp-card-title">Seating & Space</h3>
-              <p class="exp-card-desc">Comfortable indoor cafe seating arranged for conversations and casual dining with friends and family.</p>
+          <!-- Single Pinned Editorial Storytelling Card Deck -->
+          <div class="exp-mob-card-deck">
+
+            <!-- Mobile Visual Deck (3 Preloaded Image Slides) -->
+            <div class="exp-mob-visual-deck">
+              <!-- Slide 01: Coffee & Drinks -->
+              <div class="exp-mob-visual-slide is-active" data-slide="0">
+                <img 
+                  src="assets/images/gallery/gallery-coffee.webp" 
+                  alt="Artisan coffee and signature drinks at The Corner Cafe" 
+                  width="800" 
+                  height="560" 
+                  fetchpriority="high"
+                  decoding="async"
+                  class="exp-mob-slide-img"
+                />
+                <span class="exp-mob-badge">01 · Artisan Brews</span>
+                <div class="exp-mob-vignette" aria-hidden="true"></div>
+              </div>
+
+              <!-- Slide 02: Comforting Food -->
+              <div class="exp-mob-visual-slide" data-slide="1">
+                <img 
+                  src="assets/images/gallery/gallery-pizza.webp" 
+                  alt="Comforting cafe bites and handcrafted vegetarian pizzas" 
+                  width="800" 
+                  height="560" 
+                  loading="eager"
+                  decoding="async"
+                  class="exp-mob-slide-img"
+                />
+                <span class="exp-mob-badge">02 · Comforting Food</span>
+                <div class="exp-mob-vignette" aria-hidden="true"></div>
+              </div>
+
+              <!-- Slide 03: Moments & Atmosphere -->
+              <div class="exp-mob-visual-slide" data-slide="2">
+                <img 
+                  src="assets/images/gallery/gallery-interior.webp" 
+                  alt="Welcoming neighbourhood cafe seating and atmosphere at Vaikunth Char Rasta" 
+                  width="800" 
+                  height="560" 
+                  loading="eager"
+                  decoding="async"
+                  class="exp-mob-slide-img"
+                />
+                <span class="exp-mob-badge">03 · Atmosphere &amp; Space</span>
+                <div class="exp-mob-vignette" aria-hidden="true"></div>
+              </div>
             </div>
-            <div class="exp-card-corner-accent" aria-hidden="true"></div>
+
+            <!-- Mobile Narrative Deck (3 Synchronized Story Panels) -->
+            <div class="exp-mob-narrative-deck">
+              <!-- Story 01 -->
+              <article class="exp-mob-story-panel is-active" data-story="0" aria-hidden="false">
+                <span class="exp-card-tag">CAFE ESSENTIAL · 01 / 03</span>
+                <h3 class="exp-mob-heading">Artisan Brews &amp; Crafted Sips</h3>
+                <p class="exp-mob-body">
+                  Classic espresso coffees, rich cold brews, fragrant herbal teas, and decadent thickshakes crafted fresh for your daily pause.
+                </p>
+                <div class="exp-card-features">
+                  <span class="exp-feature-pill">Artisan Coffee</span>
+                  <span class="exp-feature-pill">House Cold Brew</span>
+                  <span class="exp-feature-pill">Signature Shakes</span>
+                </div>
+              </article>
+
+              <!-- Story 02 -->
+              <article class="exp-mob-story-panel" data-story="1" aria-hidden="true">
+                <span class="exp-card-tag">CAFE ESSENTIAL · 02 / 03</span>
+                <h3 class="exp-mob-heading">Comforting Handcrafted Bites</h3>
+                <p class="exp-mob-body">
+                  Handcrafted earthen Kulhad Pizzas, toasted cheese sandwiches, loaded frankies, and sizzling pastas made fresh in our vegetarian kitchen.
+                </p>
+                <div class="exp-card-features">
+                  <span class="exp-feature-pill">Kulhad Pizza</span>
+                  <span class="exp-feature-pill">Grilled Sandwiches</span>
+                  <span class="exp-feature-pill">100% Pure Veg</span>
+                </div>
+              </article>
+
+              <!-- Story 03 -->
+              <article class="exp-mob-story-panel" data-story="2" aria-hidden="true">
+                <span class="exp-card-tag">CAFE ESSENTIAL · 03 / 03</span>
+                <h3 class="exp-mob-heading">A Neighbourhood Corner to Unwind</h3>
+                <p class="exp-mob-body">
+                  A welcoming neighbourhood corner at Vaikunth Char Rasta on Waghodia Road, designed for unhurried conversations and relaxed catch-ups.
+                </p>
+                <div class="exp-card-features">
+                  <span class="exp-feature-pill">Waghodia Road</span>
+                  <span class="exp-feature-pill">Unhurried Setting</span>
+                  <span class="exp-feature-pill">Welcoming Seating</span>
+                </div>
+              </article>
+            </div>
+
           </div>
 
-          <div class="exp-card reveal-on-scroll is-revealed" style="--stagger-delay: 300ms">
-            <div class="exp-card-number">04</div>
-            <div class="exp-card-body">
-              <h3 class="exp-card-title">Convenient Location</h3>
-              <p class="exp-card-desc">Located at Vaikunth Char Rasta on Waghodia Road, serving both dine-in and takeaway guests.</p>
-            </div>
-            <div class="exp-card-corner-accent" aria-hidden="true"></div>
+          <!-- Subtle Scroll Hint -->
+          <div class="exp-mob-hint" aria-hidden="true">
+            <span class="exp-mob-hint-text">SCROLL TO EXPLORE</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
           </div>
+
+        </div>
+
+        <!-- C2. Accessible Fallback Stream (For No-JS and Prefers-Reduced-Motion) -->
+        <div id="experience-cards-grid" class="experience-cards-grid" aria-label="Experience Highlights (Static Stream)">
+          <article class="exp-mobile-card reveal-on-scroll">
+            <div class="exp-mobile-img-wrap">
+              <img src="assets/images/gallery/gallery-coffee.webp" alt="Coffee &amp; Drinks" width="800" height="500" loading="lazy" class="exp-mobile-img">
+              <span class="exp-mobile-badge">01 · Coffee &amp; Drinks</span>
+            </div>
+            <div class="exp-mobile-body">
+              <span class="exp-card-tag">CAFE ESSENTIAL · 01 / 03</span>
+              <h3 class="exp-mobile-title">Artisan Brews &amp; Crafted Sips</h3>
+              <p class="exp-mobile-desc">Classic espresso coffees, rich cold brews, fragrant herbal teas, and decadent thickshakes crafted fresh for your daily pause.</p>
+              <div class="exp-card-features">
+                <span class="exp-feature-pill">Artisan Coffee</span>
+                <span class="exp-feature-pill">House Cold Brew</span>
+                <span class="exp-feature-pill">Signature Shakes</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="exp-mobile-card reveal-on-scroll">
+            <div class="exp-mobile-img-wrap">
+              <img src="assets/images/gallery/gallery-pizza.webp" alt="Comforting Food" width="800" height="500" loading="lazy" class="exp-mobile-img">
+              <span class="exp-mobile-badge">02 · Comforting Food</span>
+            </div>
+            <div class="exp-mobile-body">
+              <span class="exp-card-tag">CAFE ESSENTIAL · 02 / 03</span>
+              <h3 class="exp-mobile-title">Comforting Handcrafted Bites</h3>
+              <p class="exp-mobile-desc">From handcrafted earthen Kulhad Pizzas and toasted cheese sandwiches to loaded frankies and sizzling pastas made fresh in our vegetarian kitchen.</p>
+              <div class="exp-card-features">
+                <span class="exp-feature-pill">Kulhad Pizza</span>
+                <span class="exp-feature-pill">Grilled Sandwiches</span>
+                <span class="exp-feature-pill">100% Pure Veg</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="exp-mobile-card reveal-on-scroll">
+            <div class="exp-mobile-img-wrap">
+              <img src="assets/images/gallery/gallery-interior.webp" alt="Moments &amp; Atmosphere" width="800" height="500" loading="lazy" class="exp-mobile-img">
+              <span class="exp-mobile-badge">03 · Moments &amp; Atmosphere</span>
+            </div>
+            <div class="exp-mobile-body">
+              <span class="exp-card-tag">CAFE ESSENTIAL · 03 / 03</span>
+              <h3 class="exp-mobile-title">A Neighbourhood Corner to Unwind</h3>
+              <p class="exp-mobile-desc">A comfortable neighbourhood corner at Vaikunth Char Rasta on Waghodia Road, designed for unhurried conversations and casual dining with family and friends.</p>
+              <div class="exp-card-features">
+                <span class="exp-feature-pill">Waghodia Road</span>
+                <span class="exp-feature-pill">Unhurried Setting</span>
+                <span class="exp-feature-pill">Welcoming Seating</span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -2409,10 +2899,10 @@
     <section id="gallery" aria-label="Visual Gallery">
       <div class="container">
         <!-- Section Header -->
-        <header class="section-header text-center reveal-on-scroll">
-          <span class="section-eyebrow">VISUAL JOURNAL</span>
-          <h2 class="section-title">A taste of the good life.</h2>
-          <p class="section-subtitle">
+        <header class="section-header text-center">
+          <span class="section-eyebrow reveal-text">VISUAL JOURNAL</span>
+          <h2 class="section-title reveal-heading">A taste of the good life.</h2>
+          <p class="section-subtitle reveal-text" style="--stagger-delay: 120ms;">
             Visual concept representation of our menu items and coffee offerings. Real cafe photography to be updated upon official business verification.
           </p>
         </header>
@@ -2721,10 +3211,10 @@
     <section id="reviews" aria-label="Customer Reviews & Ratings">
       <div class="container">
         <!-- Section Header -->
-        <header class="section-header text-center reveal-on-scroll">
-          <span class="section-eyebrow">PUBLIC REVIEWS & LISTING</span>
-          <h2 class="section-title">Google Reviews & Reputation.</h2>
-          <p class="section-subtitle">
+        <header class="section-header text-center">
+          <span class="section-eyebrow reveal-text">PUBLIC REVIEWS & LISTING</span>
+          <h2 class="section-title reveal-heading">Google Reviews & Reputation.</h2>
+          <p class="section-subtitle reveal-text" style="--stagger-delay: 120ms;">
             Based on public Google Maps listings, see what guests note about stopping by The Corner Cafe.
           </p>
         </header>
@@ -2838,10 +3328,10 @@
     <section id="contact" aria-label="Location and Contact Information">
       <div class="container">
         <!-- Section Header -->
-        <header class="section-header reveal-on-scroll">
-          <span class="section-eyebrow">VISIT US TODAY</span>
-          <h2 class="section-title">Find your corner.</h2>
-          <p class="section-subtitle">
+        <header class="section-header">
+          <span class="section-eyebrow reveal-text">VISIT US TODAY</span>
+          <h2 class="section-title reveal-heading">Find your corner.</h2>
+          <p class="section-subtitle reveal-text" style="--stagger-delay: 120ms;">
             We are conveniently located at Vaikunth Char Rasta, Waghodia Road. Drop by for your morning brew or an evening feast with friends.
           </p>
         </header>
@@ -3039,7 +3529,11 @@
     </a>
   </aside>
 
-  <!-- Modular Vanilla JavaScript -->
+  <!-- GSAP 3.12.5 & ScrollTrigger Engine -->
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+
+  <!-- Modular Vanilla JavaScript Application -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

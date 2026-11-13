@@ -10,20 +10,29 @@
 
 @media (max-width: 767px) {
   :root {
-    --header-height: 70px;
+    --header-height: 68px;
     --container-padding: 1.25rem;
   }
 
   html,
   body {
     overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
     max-width: 100vw;
+    position: relative;
   }
 
-  /* Body padding to prevent mobile sticky action bar overlap */
+  main,
+  #main-content {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Clearance for mobile sticky action bar is handled internally by #main-footer */
   body {
-    padding-bottom: 74px;
+    padding-bottom: 0;
   }
 
   /* Header adjustments */
@@ -59,7 +68,10 @@
   /* Hero Section Mobile */
   #hero {
     position: relative;
-    padding-top: calc(var(--header-height) + 1.25rem);
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding-top: calc(var(--header-height, 68px) + 1.25rem);
     padding-bottom: 2.5rem;
     min-height: 100svh;
     display: flex;
@@ -68,6 +80,7 @@
     align-items: center;
   }
 
+  .hero-container,
   .hero-content {
     width: 100%;
     max-width: 380px;
@@ -75,11 +88,16 @@
     padding: 0 0.5rem;
   }
 
+  .hero-main-area {
+    width: 100%;
+    margin-bottom: 1.35rem;
+  }
+
   .hero-eyebrow {
     font-size: 0.6875rem;
     letter-spacing: 0.16em;
     gap: 0.5rem;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.75rem;
   }
 
   .hero-eyebrow::before,
@@ -88,18 +106,23 @@
   }
 
   .hero-headline {
-    font-size: clamp(2.2rem, 8.2vw, 3rem);
-    line-height: 1.14;
+    font-size: clamp(2.15rem, 7.8vw, 2.75rem);
+    line-height: 1.15;
     letter-spacing: -0.015em;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-line-primary,
+  .hero-line-secondary {
+    white-space: normal !important;
   }
 
   .hero-support-text {
     font-size: 0.9375rem;
     line-height: 1.55;
     color: rgba(var(--color-cream-rgb), 0.92);
-    max-width: 310px;
-    margin: 0 auto 1.65rem;
+    max-width: 320px;
+    margin: 0 auto 1.5rem;
   }
 
   .hero-cta-cluster {
@@ -107,7 +130,7 @@
     flex-direction: column;
     width: 100%;
     gap: 0.75rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 0;
   }
 
   .btn-primary {
@@ -127,6 +150,10 @@
     min-height: 48px;
     border-radius: 9999px;
     border-color: rgba(var(--color-cream-rgb), 0.35);
+  }
+
+  .hero-info-strip-area {
+    width: 100%;
   }
 
   .hero-trust-bar {
@@ -156,83 +183,130 @@
     border: 1px solid rgba(var(--color-cream-rgb), 0.12);
   }
 
+  .hero-scroll-area,
   .scroll-indicator {
-    display: none; /* Hide scroll mouse on mobile to save vertical space */
+    display: none !important; /* Hide scroll mouse on mobile to save vertical space */
   }
 
-  /* Intro Section Mobile */
-  .intro-grid {
-    gap: 2.5rem;
+  /* Editorial Story Section Mobile */
+  .story-header {
+    margin-bottom: 2rem;
   }
 
-  .intro-lead-text {
+  .story-eyebrow-row {
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .story-eyebrow-rule {
+    max-width: 100px;
+  }
+
+  .story-headline {
+    font-size: clamp(2rem, 8.5vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .story-editorial-stage {
+    gap: 2rem;
+  }
+
+  .story-image-inner {
+    aspect-ratio: 16 / 10;
+  }
+
+  .story-image-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.6875rem;
+  }
+
+  .story-drop-cap {
+    font-size: 3rem;
+    line-height: 0.85;
+    padding-right: 0.6rem;
+  }
+
+  .story-lead-text {
     font-size: 1.0625rem;
-    margin-top: 1rem;
+    line-height: 1.7;
     margin-bottom: 1rem;
   }
 
-  .intro-body-text {
+  .story-body-text {
     font-size: 0.9375rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    line-height: 1.65;
   }
 
-  .intro-stamp {
-    font-size: 0.6875rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .intro-images-col {
-    padding-right: 0.75rem;
-  }
-
-  .intro-img-accent-wrap {
-    width: 140px;
-    bottom: -1.25rem;
-    right: -0.5rem;
-    border-width: 3px;
+  .story-ethos-strip {
+    padding: 0.5rem 0.85rem;
+    gap: 0.6rem;
   }
 
   /* Editorial Menu Section Mobile */
   .menu-sticky-nav-bar {
-    margin-left: calc(-1 * var(--container-padding, 1.25rem));
-    margin-right: calc(-1 * var(--container-padding, 1.25rem));
-    padding-left: 0;
-    padding-right: 0;
-    width: auto;
-    max-width: 100vw;
-    top: var(--header-height, 70px);
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    top: var(--header-height, 68px);
     margin-bottom: 2rem;
+    overflow: hidden;
   }
 
   .menu-sticky-nav-inner {
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     box-sizing: border-box;
     padding: 0.35rem var(--container-padding, 1.25rem);
+    scroll-padding: 0 var(--container-padding, 1.25rem);
     gap: 0.5rem;
-    overflow-x: auto;
-    overflow-y: hidden;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
 
   .menu-sticky-nav-inner::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   .menu-nav-pill {
+    flex: 0 0 auto !important;
     flex-shrink: 0 !important;
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     gap: 0.4rem;
     padding: 0.45rem 0.95rem;
     font-size: 0.775rem;
     min-height: 40px;
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
     white-space: nowrap !important;
+    word-break: keep-all !important;
+  }
+
+  .menu-nav-pill .pill-num,
+  .menu-nav-pill .pill-label,
+  .menu-nav-pill .pill-count {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    word-break: keep-all !important;
   }
 
   .menu-editorial-category {
@@ -264,18 +338,49 @@
 
   .menu-row-item {
     padding: 0.55rem 0.25rem;
+    overflow: visible;
   }
 
-  .menu-row-name {
-    font-size: 0.98rem;
-  }
-
-  .menu-row-price {
-    font-size: 0.9rem;
+  .menu-row-main {
+    gap: 0.35rem;
   }
 
   .menu-row-title-wrap {
-    max-width: 62%;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 116px);
+    gap: 0.45rem;
+  }
+
+  .menu-row-name {
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+
+  .menu-row-leader {
+    flex: 1 1 8px;
+    min-width: 0;
+    margin: 0 0.25rem 3px;
+  }
+
+  .menu-row-price-wrap {
+    flex-shrink: 0;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .menu-row-price {
+    font-size: 0.875rem;
+  }
+
+  .menu-row-price.is-enquire {
+    font-size: 0.775rem;
+  }
+
+  .menu-row-enquire-link {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
   }
 
   .menu-editorial-break {
@@ -295,16 +400,71 @@
     font-size: 0.98rem;
   }
 
+  .menu-nav-glider {
+    top: 3px;
+    bottom: 3px;
+  }
+
+  .menu-cat-footer-bar {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+  }
+
+  .menu-cat-footer-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .menu-cat-footer-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .menu-cat-nav-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
   .menu-note-box {
     font-size: 0.8125rem;
     padding: 0.85rem 1.25rem;
     line-height: 1.5;
   }
 
-  /* Experience Section Mobile */
-  .experience-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+  /* Experience Section Mobile (< 992px) */
+  .experience-pinned-viewport,
+  .experience-pinned-stage {
+    display: none !important;
+  }
+
+  .experience-mobile-container {
+    display: block !important;
+    width: 100%;
+  }
+
+  .experience-mobile-pinned-stage {
+    display: flex !important;
+  }
+
+  .experience-mobile-container .experience-cards-grid {
+    display: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .experience-mobile-pinned-stage {
+      display: none !important;
+    }
+    .experience-mobile-container .experience-cards-grid {
+      display: grid !important;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
   }
 
   .exp-card {
@@ -497,16 +657,18 @@
   }
 
   /* Mobile Navigation Drawer Safe Areas */
-  #mobile-drawer {
-    padding: 4rem 1.5rem 3rem;
-    padding-top: calc(4rem + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+  .mobile-drawer-overlay {
+    padding: 0;
+  }
+
+  .mobile-drawer-body {
+    padding: 1.75rem var(--container-padding, 1.25rem) calc(1.75rem + env(safe-area-inset-bottom, 0px));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
   .mobile-nav-link {
-    font-size: 1.65rem;
+    font-size: clamp(1.45rem, 5vw, 1.85rem);
   }
 
   /* Mobile Sticky Bottom Action Bar */
@@ -575,11 +737,54 @@
     padding: 0.4rem 0.85rem;
     font-size: 0.725rem;
     min-height: 38px;
+    flex: 0 0 auto !important;
     flex-shrink: 0 !important;
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
   }
 
-  .intro-img-accent-wrap {
-    width: 120px;
+  .story-ethos-strip {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.35rem;
+  }
+
+  .mobile-nav-list {
+    gap: 0.85rem;
+  }
+
+  /* Compact Menu Row Polish on Narrow Screens */
+  .menu-row-title-wrap {
+    max-width: calc(100% - 105px);
+    gap: 0.35rem;
+  }
+
+  .menu-row-name {
+    font-size: 0.88rem;
+  }
+
+  .menu-row-price.is-enquire {
+    font-size: 0.725rem;
+  }
+
+  .menu-row-enquire-link {
+    width: 18px;
+    height: 18px;
+  }
+
+  .menu-row-enquire-link svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .mobile-drawer-body {
+    padding: 1.25rem 0.85rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   }
 
   .mobile-action-item span {
@@ -595,7 +800,7 @@
 @media (min-width: 768px) and (max-width: 1024px) {
   :root {
     --container-padding: 2rem;
-    --header-height: 76px;
+    --header-height: 68px;
   }
 
   /* Desktop Menu sizing for tablet landscape */
@@ -628,17 +833,14 @@
     max-width: 560px;
   }
 
-  /* Intro Section on Tablet */
-  .intro-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    align-items: center;
+  /* Editorial Story Section on Tablet */
+  .story-editorial-stage {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
   }
 
-  .intro-img-accent-wrap {
-    width: clamp(140px, 32%, 200px);
-    bottom: -1.5rem;
-    right: -0.75rem;
+  .story-image-inner {
+    aspect-ratio: 16 / 10;
   }
 
   /* Menu Section on Tablet */
@@ -652,10 +854,12 @@
     height: 240px;
   }
 
-  /* Experience Cards on Tablet (2x2 Grid) */
+  /* Experience Cards on Tablet (Clean Single Column Stream with Max Width) */
   .experience-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    max-width: 680px;
+    margin: 1.5rem auto 0;
+    gap: 1.75rem;
   }
 
   /* Gallery on Tablet (2 columns, 4 rows = 8 items evenly) */
@@ -741,9 +945,15 @@
   .menu-cat-btn,
   .menu-nav-pill {
     min-height: 44px;
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
-    flex-shrink: 0;
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
   }
 
   .mobile-action-item {
@@ -776,8 +986,8 @@
 
 @media print {
   #main-header,
-  #preloader,
   #custom-cursor,
+  #custom-cursor-dot,
   #mobile-action-bar,
   .scroll-indicator,
   .menu-category-nav-wrapper {
