@@ -921,8 +921,8 @@ export class AnimationManager {
           stories[0],
           {
             autoAlpha: 0,
-            y: -14,
-            duration: 0.22,
+            y: -12,
+            duration: 0.14,
             ease: 'power2.in'
           },
           0.65
@@ -933,7 +933,7 @@ export class AnimationManager {
           {
             autoAlpha: 0,
             scale: 0.96,
-            duration: 0.28,
+            duration: 0.25,
             ease: 'power2.inOut'
           },
           0.67
@@ -944,7 +944,7 @@ export class AnimationManager {
           {
             autoAlpha: 1,
             scale: 1,
-            duration: 0.28,
+            duration: 0.25,
             ease: 'power2.inOut'
           },
           0.70
@@ -955,10 +955,10 @@ export class AnimationManager {
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.24,
+            duration: 0.15,
             ease: 'power2.out'
           },
-          0.74
+          0.80
         );
 
         // Segment 1 fill across second third (0.66 to 1.33)
@@ -971,8 +971,8 @@ export class AnimationManager {
           stories[1],
           {
             autoAlpha: 0,
-            y: -14,
-            duration: 0.22,
+            y: -12,
+            duration: 0.14,
             ease: 'power2.in'
           },
           1.35
@@ -983,7 +983,7 @@ export class AnimationManager {
           {
             autoAlpha: 0,
             scale: 0.96,
-            duration: 0.28,
+            duration: 0.25,
             ease: 'power2.inOut'
           },
           1.37
@@ -994,7 +994,7 @@ export class AnimationManager {
           {
             autoAlpha: 1,
             scale: 1,
-            duration: 0.28,
+            duration: 0.25,
             ease: 'power2.inOut'
           },
           1.40
@@ -1005,10 +1005,10 @@ export class AnimationManager {
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.24,
+            duration: 0.15,
             ease: 'power2.out'
           },
-          1.44
+          1.50
         );
 
         // Segment 2 fill across final third (1.33 to 2.00)
