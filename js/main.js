@@ -83,13 +83,13 @@ class App {
 
   renderExperiences() {
     const container = document.getElementById('experience-cards-grid');
-    if (!container) return;
+    if (!container || container.children.length > 0) return;
 
     const experiences = CAFE_CONFIG.experiences || [];
     container.innerHTML = experiences
       .map(
         (exp, i) => `
-        <div class="exp-card reveal-on-scroll is-revealed" style="--stagger-delay: ${i * 100}ms">
+        <div class="exp-card reveal-on-scroll" style="--stagger-delay: ${i * 90}ms">
           <div class="exp-card-number">${exp.number}</div>
           <div class="exp-card-body">
             <h3 class="exp-card-title">${exp.title}</h3>
@@ -110,7 +110,7 @@ class App {
     container.innerHTML = highlights
       .map(
         (hl, i) => `
-        <article class="reputation-card reveal-on-scroll is-revealed" style="--stagger-delay: ${i * 80}ms">
+        <article class="reputation-card reveal-on-scroll" style="--stagger-delay: ${i * 80}ms">
           <div class="reputation-card-header">
             <span class="reputation-badge">${hl.badge}</span>
             <div class="reputation-stars" aria-hidden="true">★★★★★</div>
@@ -138,6 +138,16 @@ class App {
     document.addEventListener('mousedown', () => {
       document.body.classList.remove('user-is-tabbing');
     });
+
+    // Guard against unwanted horizontal scroll drift on mobile touch
+    const checkOverflow = () => {
+      if (document.documentElement.scrollWidth > window.innerWidth) {
+        document.documentElement.style.overflowX = 'clip';
+        document.body.style.overflowX = 'clip';
+      }
+    };
+    window.addEventListener('resize', checkOverflow, { passive: true });
+    checkOverflow();
   }
 
   setupBackToTop() {
@@ -153,10 +163,14 @@ class App {
     toggleVisibility();
 
     btn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      if (this.animations && this.animations.lenis) {
+        this.animations.lenis.scrollTo(0, { duration: 1.4 });
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
     });
   }
 }

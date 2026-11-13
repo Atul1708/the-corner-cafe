@@ -12,7 +12,7 @@ export class NavigationManager {
     this.mobileDrawer = document.getElementById('mobile-drawer');
     this.mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     this.mobileActionBar = document.getElementById('mobile-action-bar');
-    this.footer = document.getElementById('contact');
+    this.footer = document.getElementById('main-footer');
     
     this.sections = document.querySelectorAll('section[id], footer[id]');
     this.currentActiveId = '';
@@ -111,19 +111,49 @@ export class NavigationManager {
   bindMobileMenu() {
     if (!this.mobileMenuBtn || !this.mobileDrawer) return;
 
+    this.closeBtn = document.getElementById('mobile-drawer-close');
+
     const toggleMenu = (open) => {
       const isOpen = open !== undefined ? open : !this.mobileDrawer.classList.contains('open');
       this.mobileDrawer.classList.toggle('open', isOpen);
       this.mobileMenuBtn.classList.toggle('active', isOpen);
       this.mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       this.mobileDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      
+      // Robust lock on both body and root to prevent scrolling on iOS and Android
       document.body.classList.toggle('menu-open', isOpen);
+      document.documentElement.classList.toggle('menu-open', isOpen);
+
+      // Restore focus to trigger button when closed
+      if (!isOpen && this.mobileMenuBtn) {
+        this.mobileMenuBtn.focus();
+      }
     };
 
-    this.mobileMenuBtn.addEventListener('click', () => toggleMenu());
+    // Open / toggle via hamburger button
+    this.mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
 
-    // Close on clicking links
-    this.mobileNavLinks.forEach((link) => {
+    // Close via dedicated drawer close button
+    if (this.closeBtn) {
+      this.closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu(false);
+      });
+    }
+
+    // Close on clicking backdrop overlay
+    this.mobileDrawer.addEventListener('click', (e) => {
+      if (e.target === this.mobileDrawer) {
+        toggleMenu(false);
+      }
+    });
+
+    // Close on clicking any navigation link inside drawer
+    const drawerLinks = this.mobileDrawer.querySelectorAll('a');
+    drawerLinks.forEach((link) => {
       link.addEventListener('click', () => toggleMenu(false));
     });
 
@@ -131,7 +161,6 @@ export class NavigationManager {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.mobileDrawer.classList.contains('open')) {
         toggleMenu(false);
-        this.mobileMenuBtn.focus();
       }
     });
   }
@@ -146,14 +175,19 @@ export class NavigationManager {
         const targetEl = document.querySelector(targetId);
         if (targetEl) {
           e.preventDefault();
-          const headerOffset = 80;
-          const elementPosition = targetEl.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+          if (targetId === '#hero') {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          } else {
+            const headerHeight = this.header ? this.header.offsetHeight : 68;
+            const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+              top: Math.max(0, elementPosition - headerHeight),
+              behavior: 'smooth'
+            });
+          }
 
           // Set focus for accessibility
           targetEl.setAttribute('tabindex', '-1');
