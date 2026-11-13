@@ -1,0 +1,796 @@
+/**
+ * The Corner Cafe – Advanced Responsive Adaptations
+ * Multi-device precision for mobile (360px, 375px, 390px, 430px), tablets (768px, 820px, 1024px),
+ * laptops, and ultra-wide screens.
+ */
+
+/* ==========================================================================
+   Global Mobile & Touch Polish (< 768px)
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 70px;
+    --container-padding: 1.25rem;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* Body padding to prevent mobile sticky action bar overlap */
+  body {
+    padding-bottom: 74px;
+  }
+
+  /* Header adjustments */
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .brand-name {
+    font-size: 1.0625rem;
+  }
+
+  .brand-tagline {
+    font-size: 0.625rem;
+  }
+
+  /* Section Spacing on Mobile */
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.85rem, 6.5vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 0.9375rem;
+    margin-top: 0.75rem;
+  }
+
+  /* Hero Section Mobile */
+  #hero {
+    position: relative;
+    padding-top: calc(var(--header-height) + 1.25rem);
+    padding-bottom: 2.5rem;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    width: 16px;
+  }
+
+  .hero-headline {
+    font-size: clamp(2.2rem, 8.2vw, 3rem);
+    line-height: 1.14;
+    letter-spacing: -0.015em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-support-text {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: rgba(var(--color-cream-rgb), 0.92);
+    max-width: 310px;
+    margin: 0 auto 1.65rem;
+  }
+
+  .hero-cta-cluster {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9375rem;
+    min-height: 48px;
+    border-radius: 9999px;
+  }
+
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9375rem;
+    min-height: 48px;
+    border-radius: 9999px;
+    border-color: rgba(var(--color-cream-rgb), 0.35);
+  }
+
+  .hero-trust-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(var(--color-cream-rgb), 0.15);
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .trust-badge-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(var(--color-cream-rgb), 0.92);
+    background-color: rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--color-cream-rgb), 0.12);
+  }
+
+  .scroll-indicator {
+    display: none; /* Hide scroll mouse on mobile to save vertical space */
+  }
+
+  /* Intro Section Mobile */
+  .intro-grid {
+    gap: 2.5rem;
+  }
+
+  .intro-lead-text {
+    font-size: 1.0625rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro-body-text {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-stamp {
+    font-size: 0.6875rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .intro-images-col {
+    padding-right: 0.75rem;
+  }
+
+  .intro-img-accent-wrap {
+    width: 140px;
+    bottom: -1.25rem;
+    right: -0.5rem;
+    border-width: 3px;
+  }
+
+  /* Editorial Menu Section Mobile */
+  .menu-sticky-nav-bar {
+    margin-left: calc(-1 * var(--container-padding, 1.25rem));
+    margin-right: calc(-1 * var(--container-padding, 1.25rem));
+    padding-left: 0;
+    padding-right: 0;
+    width: auto;
+    max-width: 100vw;
+    top: var(--header-height, 70px);
+    margin-bottom: 2rem;
+  }
+
+  .menu-sticky-nav-inner {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.35rem var(--container-padding, 1.25rem);
+    gap: 0.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .menu-sticky-nav-inner::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .menu-nav-pill {
+    flex-shrink: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.95rem;
+    font-size: 0.775rem;
+    min-height: 40px;
+    white-space: nowrap !important;
+  }
+
+  .menu-editorial-category {
+    scroll-margin-top: calc(var(--header-height, 70px) + 55px);
+    margin-bottom: 2.25rem;
+  }
+
+  .menu-cat-title {
+    font-size: 1.55rem;
+  }
+
+  .menu-cat-num {
+    font-size: 1.25rem;
+  }
+
+  .menu-subgroup {
+    margin-bottom: 1.6rem;
+  }
+
+  .menu-subgroup-title {
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .menu-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .menu-row-item {
+    padding: 0.55rem 0.25rem;
+  }
+
+  .menu-row-name {
+    font-size: 0.98rem;
+  }
+
+  .menu-row-price {
+    font-size: 0.9rem;
+  }
+
+  .menu-row-title-wrap {
+    max-width: 62%;
+  }
+
+  .menu-editorial-break {
+    margin: 1.75rem 0 2.25rem;
+  }
+
+  .menu-editorial-img-wrap {
+    height: 180px;
+    border-radius: 12px;
+  }
+
+  .menu-editorial-caption {
+    padding: 0.85rem 1rem;
+  }
+
+  .caption-title {
+    font-size: 0.98rem;
+  }
+
+  .menu-note-box {
+    font-size: 0.8125rem;
+    padding: 0.85rem 1.25rem;
+    line-height: 1.5;
+  }
+
+  /* Experience Section Mobile */
+  .experience-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .exp-card {
+    padding: 1.75rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .exp-card-number {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .exp-card-title {
+    font-size: 1.35rem;
+  }
+
+  .exp-card-desc {
+    font-size: 0.875rem;
+  }
+
+  /* Gallery Section Mobile */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    border-radius: 12px;
+  }
+
+  .gallery-item-caption {
+    opacity: 1; /* Always visible on mobile touch */
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(37, 23, 17, 0.9) 0%, rgba(37, 23, 17, 0.2) 65%, transparent 100%);
+  }
+
+  .gallery-item-title {
+    font-size: 1.1rem;
+  }
+
+  .gallery-item-sub {
+    font-size: 0.75rem;
+  }
+
+  .gallery-expand-icon {
+    width: 32px;
+    height: 32px;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  /* Lightbox Mobile */
+  .lightbox-container {
+    width: 95vw;
+    max-height: 90svh;
+    border-radius: 12px;
+  }
+
+  .lightbox-media-wrap {
+    max-height: 52svh;
+  }
+
+  #lightbox-img {
+    max-height: 52svh;
+  }
+
+  .lightbox-info-bar {
+    padding: 0.85rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  #lightbox-title {
+    font-size: 1.1rem;
+  }
+
+  #lightbox-subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .lightbox-close-btn {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox-prev-btn {
+    left: 0.5rem;
+  }
+
+  .lightbox-next-btn {
+    right: 0.5rem;
+  }
+
+  /* Reviews Section Mobile */
+  .reviews-showcase {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .reviews-rating-hero {
+    padding: 1.75rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .rating-big-number {
+    font-size: 3.25rem;
+  }
+
+  .rating-transparency-note {
+    margin-bottom: 1.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .btn-google-reviews {
+    width: 100%;
+    min-height: 48px;
+    font-size: 0.875rem;
+  }
+
+  .btn-leave-review {
+    width: 100%;
+    min-height: 44px;
+    font-size: 0.8125rem;
+  }
+
+  .reviews-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .reputation-card {
+    padding: 1.35rem 1.15rem;
+    border-radius: 14px;
+  }
+
+  /* Contact & Location Mobile */
+  .location-grid {
+    gap: 2rem;
+  }
+
+  .location-info-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .location-item {
+    gap: 1rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .location-icon-box {
+    width: 38px;
+    height: 38px;
+  }
+
+  .location-item-content p {
+    font-size: 0.9375rem;
+  }
+
+  .location-actions-cluster {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .btn-action-directions,
+  .btn-action-call,
+  .btn-action-whatsapp {
+    width: 100%;
+    flex: auto;
+    min-height: 48px;
+    font-size: 0.9375rem;
+  }
+
+  .map-container-wrap {
+    min-height: 280px;
+    border-radius: 16px;
+  }
+
+  .map-iframe {
+    min-height: 280px;
+  }
+
+  /* Mobile Navigation Drawer Safe Areas */
+  #mobile-drawer {
+    padding: 4rem 1.5rem 3rem;
+    padding-top: calc(4rem + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.65rem;
+  }
+
+  /* Mobile Sticky Bottom Action Bar */
+  #mobile-action-bar {
+    padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Back to Top on Mobile: floats cleanly above the fixed action bar */
+  .back-to-top-btn {
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px) + 12px);
+    right: 14px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .mobile-action-item {
+    font-size: 0.6875rem;
+    padding: 0.35rem 0.25rem;
+    min-height: 48px;
+  }
+
+  /* Footer Mobile */
+  #main-footer {
+    padding-top: 3.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .footer-top-grid {
+    gap: 2.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-logo {
+    font-size: 1.45rem;
+  }
+}
+
+/* ==========================================================================
+   Extra Compact Phones (320px - 374px)
+   e.g., iPhone SE, Galaxy Fold outer screen
+   ========================================================================== */
+
+@media (max-width: 374px) {
+  :root {
+    --container-padding: 0.85rem;
+  }
+
+  .brand-name {
+    font-size: 0.9375rem;
+  }
+
+  .hero-headline {
+    font-size: 2.15rem;
+  }
+
+  .hero-support-text {
+    font-size: 0.875rem;
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+  }
+
+  .menu-cat-btn,
+  .menu-nav-pill {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.725rem;
+    min-height: 38px;
+    flex-shrink: 0 !important;
+  }
+
+  .intro-img-accent-wrap {
+    width: 120px;
+  }
+
+  .mobile-action-item span {
+    font-size: 0.625rem;
+  }
+}
+
+/* ==========================================================================
+   Tablets (768px - 1024px)
+   iPad Portrait, iPad Air, iPad Mini, Surface Pro
+   ========================================================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  :root {
+    --container-padding: 2rem;
+    --header-height: 76px;
+  }
+
+  /* Desktop Menu sizing for tablet landscape */
+  .desktop-nav {
+    gap: 1.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.8125rem;
+  }
+
+  .btn-find-us {
+    padding: 0.55rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  /* Hero on Tablet */
+  #hero {
+    min-height: 80vh;
+    padding-top: calc(var(--header-height) + 2rem);
+    padding-bottom: 4rem;
+  }
+
+  .hero-headline {
+    font-size: clamp(3.25rem, 6.5vw, 4.25rem);
+  }
+
+  .hero-support-text {
+    font-size: 1.125rem;
+    max-width: 560px;
+  }
+
+  /* Intro Section on Tablet */
+  .intro-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .intro-img-accent-wrap {
+    width: clamp(140px, 32%, 200px);
+    bottom: -1.5rem;
+    right: -0.75rem;
+  }
+
+  /* Menu Section on Tablet */
+  .menu-editorial-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2.25rem;
+    row-gap: 0.65rem;
+  }
+
+  .menu-editorial-img-wrap {
+    height: 240px;
+  }
+
+  /* Experience Cards on Tablet (2x2 Grid) */
+  .experience-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Gallery on Tablet (2 columns, 4 rows = 8 items evenly) */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 240px;
+    gap: 1.25rem;
+  }
+
+  .gallery-item-1,
+  .gallery-item-6 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  /* Reviews on Tablet */
+  .reviews-showcase {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .reviews-highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* Location Section on Tablet */
+  .location-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .location-info-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .map-iframe {
+    min-height: 380px;
+  }
+
+  /* Footer on Tablet */
+  .footer-top-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ==========================================================================
+   Desktop Menu Breakpoint Guard (768px - 991px)
+   Ensure mobile hamburger is active and desktop nav is hidden until 992px
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Touch Devices Target Optimization (Both Phones & Tablets)
+   ========================================================================== */
+
+@media (pointer: coarse) {
+  a, button, input {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .menu-cat-btn,
+  .menu-nav-pill {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .mobile-action-item {
+    min-height: 48px;
+  }
+
+  /* Always keep captions readable on touch devices without needing hover */
+  .gallery-item-caption {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Large Desktop Screens (1440px+)
+   ========================================================================== */
+
+@media (min-width: 1440px) {
+  :root {
+    --max-width: 1360px;
+  }
+
+  .hero-headline {
+    font-size: 5.75rem;
+  }
+}
+
+/* ==========================================================================
+   Print Optimization
+   ========================================================================== */
+
+@media print {
+  #main-header,
+  #preloader,
+  #custom-cursor,
+  #mobile-action-bar,
+  .scroll-indicator,
+  .menu-category-nav-wrapper {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .section-title {
+    color: #000 !important;
+  }
+}
